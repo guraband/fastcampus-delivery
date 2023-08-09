@@ -18,6 +18,7 @@ public class ObjectMapperConfig {
                 .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+//                .setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
         ;
 
         return objectMapper;
