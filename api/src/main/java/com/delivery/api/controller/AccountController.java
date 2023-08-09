@@ -1,5 +1,6 @@
 package com.delivery.api.controller;
 
+import com.delivery.api.common.dto.CommonResponse;
 import com.delivery.api.model.AccountResponse;
 import com.delivery.db.entity.Account;
 import com.delivery.db.repository.AccountRepository;
@@ -18,15 +19,17 @@ public class AccountController {
     private final AccountRepository accountRepository;
 
     @GetMapping("/me")
-    public AccountResponse me() {
-        return AccountResponse.builder()
-                .name("홍길동")
-                .createdAt(LocalDateTime.now())
-                .build();
+    public CommonResponse<AccountResponse> me() {
+        return CommonResponse.ok(
+                AccountResponse.builder()
+                        .name("홍길동")
+                        .createdAt(LocalDateTime.now())
+                        .build());
     }
 
     @PostMapping("")
-    public void save() {
+    public <T> CommonResponse<T> save() {
         accountRepository.save(new Account());
+        return CommonResponse.ok();
     }
 }
