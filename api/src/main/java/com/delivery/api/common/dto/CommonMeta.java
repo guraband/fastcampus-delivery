@@ -1,5 +1,7 @@
 package com.delivery.api.common.dto;
 
+import com.delivery.api.common.status.ErrorStatusCode;
+import com.delivery.api.common.status.SuccessStatusCode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,9 +20,32 @@ public class CommonMeta {
 
     public static CommonMeta ok() {
         return CommonMeta.builder()
-                .code(200)
-                .message("OK")
+                .code(SuccessStatusCode.OK.getCode())
+                .message(SuccessStatusCode.OK.getMessage())
                 .description("성공")
+                .build();
+    }
+
+    public static CommonMeta error(ErrorStatusCode errorStatusCode) {
+        return CommonMeta.builder()
+                .code(errorStatusCode.getCode())
+                .message(errorStatusCode.getMessage())
+                .build();
+    }
+
+    public static CommonMeta error(ErrorStatusCode errorStatusCode, Throwable tx) {
+        return CommonMeta.builder()
+                .code(errorStatusCode.getCode())
+                .message(errorStatusCode.getMessage())
+                .description(tx.getLocalizedMessage())
+                .build();
+    }
+
+    public static CommonMeta error(ErrorStatusCode errorStatusCode, String description) {
+        return CommonMeta.builder()
+                .code(errorStatusCode.getCode())
+                .message(errorStatusCode.getMessage())
+                .description(description)
                 .build();
     }
 }
