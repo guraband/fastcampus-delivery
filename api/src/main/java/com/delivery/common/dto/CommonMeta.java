@@ -1,7 +1,7 @@
-package com.delivery.api.common.dto;
+package com.delivery.common.dto;
 
-import com.delivery.api.common.status.ErrorStatusCode;
-import com.delivery.api.common.status.SuccessStatusCode;
+import com.delivery.common.status.ErrorStatusCode;
+import com.delivery.common.status.SuccessStatusCode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

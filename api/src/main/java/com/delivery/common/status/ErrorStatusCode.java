@@ -1,4 +1,4 @@
-package com.delivery.api.common.status;
+package com.delivery.common.status;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

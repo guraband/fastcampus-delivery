@@ -1,4 +1,4 @@
-package com.delivery.api.common.status;
+package com.delivery.common.status;
 
 public interface StatusCode {
     Integer getHttpStatusCode();

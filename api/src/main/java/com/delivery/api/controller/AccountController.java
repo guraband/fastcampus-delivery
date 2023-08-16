@@ -1,7 +1,7 @@
 package com.delivery.api.controller;
 
-import com.delivery.api.common.dto.CommonResponse;
 import com.delivery.api.model.AccountResponse;
+import com.delivery.common.dto.CommonResponse;
 import com.delivery.db.entity.Account;
 import com.delivery.db.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
