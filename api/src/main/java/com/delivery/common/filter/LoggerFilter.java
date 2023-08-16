@@ -27,7 +27,7 @@ public class LoggerFilter implements Filter {
 
         var reqBody = new String(req.getContentAsByteArray());
 
-        log.info("# [{}] {} / {}", req.getMethod(), req.getRequestURI());
+        log.info("# [{}] {}", req.getMethod(), req.getRequestURI());
         log.info(">>> header : {}, body : {}", reqHeaders, reqBody);
 
         var resHeaders = new StringBuilder();
