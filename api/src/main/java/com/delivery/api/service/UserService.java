@@ -25,4 +25,13 @@ public class UserService {
                 })
                 .orElseThrow(() -> new ApiException(ErrorStatusCode.NULL_POINT, "User Entity is null"));
     }
+
+    private User getUserOrThrow(String email, String password) {
+        return userRepository.findFirstByEmailAndPasswordAndStatusOrderByIdDesc(email, password, UserStatus.REGISTERED)
+                .orElseThrow(() -> new ApiException(ErrorStatusCode.USER_NOT_FOUND));
+    }
+
+    public User login(String email, String password) {
+        return getUserOrThrow(email, password);
+    }
 }

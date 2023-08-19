@@ -1,8 +1,11 @@
 package com.delivery.common.exception;
 
 import com.delivery.common.dto.CommonResponse;
+import com.delivery.common.status.ErrorStatusCode;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.PropertyValueException;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +22,16 @@ public class ApiExceptionHandler {
         return ResponseEntity.status(e.getErrorStatusCode().getHttpStatusCode())
                 .body(
                         CommonResponse.error(e.getErrorStatusCode(), e.getMessage())
+                );
+    }
+
+    @ExceptionHandler(value = PropertyValueException.class)
+    public ResponseEntity<CommonResponse<Object>> propertyValueException(Exception e) {
+        log.error("", e);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(
+                        CommonResponse.error(ErrorStatusCode.BAD_REQUEST, e.getMessage())
                 );
     }
 }

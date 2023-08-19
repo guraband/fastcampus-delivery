@@ -1,6 +1,7 @@
 package com.delivery.api.controller;
 
 import com.delivery.api.business.UserBusiness;
+import com.delivery.api.model.UserLoginRequest;
 import com.delivery.api.model.UserRequest;
 import com.delivery.api.model.UserResponse;
 import com.delivery.common.dto.CommonResponse;
@@ -20,6 +21,12 @@ public class UserOpenApiController {
     @PostMapping("/register")
     public CommonResponse<UserResponse> register(@Valid @RequestBody UserRequest request) {
         var response = userBusiness.register(request);
+        return CommonResponse.ok(response);
+    }
+
+    @PostMapping("/login")
+    public CommonResponse<UserResponse> login(@Valid @RequestBody UserLoginRequest request) {
+        var response = userBusiness.login(request);
         return CommonResponse.ok(response);
     }
 }
