@@ -5,15 +5,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
     @Column(length = 50, nullable = false)
@@ -27,12 +27,11 @@ public class User extends BaseEntity {
 
     @Column(length = 50, nullable = false)
     @Enumerated(EnumType.STRING)
+    @Setter
     private UserStatus status;
 
     @Column(length = 150, nullable = false)
     private String address;
-    
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+
     private LocalDateTime lastLoginAt;
 }
