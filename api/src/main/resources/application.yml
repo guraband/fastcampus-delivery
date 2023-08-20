@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: classpath:env.yml
   jpa:
     show-sql: true
     properties:
@@ -16,3 +18,8 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
 
+token:
+  access-token:
+    ttl-hour: 1
+  refresh-token:
+    ttl-hour: 12

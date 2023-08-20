@@ -1,6 +1,6 @@
 package com.delivery.common.dto;
 
-import com.delivery.common.status.ErrorStatusCode;
+import com.delivery.common.status.StatusCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -32,15 +32,15 @@ public class CommonResponse<T> {
         return new CommonResponse<>(meta);
     }
 
-    public static CommonResponse<Object> error(ErrorStatusCode errorStatusCode) {
+    public static CommonResponse<Object> error(StatusCode errorStatusCode) {
         return new CommonResponse<>(CommonMeta.error(errorStatusCode));
     }
 
-    public static CommonResponse<Object> error(ErrorStatusCode errorStatusCode, Throwable tx) {
+    public static CommonResponse<Object> error(StatusCode errorStatusCode, Throwable tx) {
         return new CommonResponse<>(CommonMeta.error(errorStatusCode, tx));
     }
 
-    public static CommonResponse<Object> error(ErrorStatusCode errorStatusCode, String description) {
+    public static CommonResponse<Object> error(StatusCode errorStatusCode, String description) {
         return new CommonResponse<>(CommonMeta.error(errorStatusCode, description));
     }
 }

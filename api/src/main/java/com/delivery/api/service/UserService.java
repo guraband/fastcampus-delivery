@@ -31,6 +31,11 @@ public class UserService {
                 .orElseThrow(() -> new ApiException(ErrorStatusCode.USER_NOT_FOUND));
     }
 
+    public User getUserOrThrow(Long id) {
+        return userRepository.findFirstByIdAndStatusOrderByIdDesc(id, UserStatus.REGISTERED)
+                .orElseThrow(() -> new ApiException(ErrorStatusCode.USER_NOT_FOUND));
+    }
+
     public User login(String email, String password) {
         return getUserOrThrow(email, password);
     }
