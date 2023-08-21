@@ -44,4 +44,9 @@ public class Store extends BaseEntity {
 
     @Column(length = 20, nullable = false)
     private String phoneNumber;
+
+    public void init() {
+        this.star = 0;
+        this.status = StoreStatus.REGISTERED;
+    }
 }
