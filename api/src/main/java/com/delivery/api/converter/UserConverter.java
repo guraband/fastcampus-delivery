@@ -4,6 +4,7 @@ import com.delivery.api.model.UserRequest;
 import com.delivery.api.model.UserResponse;
 import com.delivery.common.annotation.Converter;
 import com.delivery.db.entity.User;
+import com.delivery.db.enums.UserStatus;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -15,6 +16,7 @@ public class UserConverter {
                 .email(request.getEmail())
                 .password(request.getPassword())
                 .address(request.getAddress())
+                .status(UserStatus.REGISTERED)
                 .build();
     }
 

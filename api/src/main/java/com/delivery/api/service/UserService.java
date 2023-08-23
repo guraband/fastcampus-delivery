@@ -19,10 +19,7 @@ public class UserService {
 
     public User register(User entity) {
         return Optional.ofNullable(entity)
-                .map(item -> {
-                    item.setStatus(UserStatus.REGISTERED);
-                    return userRepository.save(item);
-                })
+                .map(userRepository::save)
                 .orElseThrow(() -> new ApiException(ErrorStatusCode.NULL_POINT, "User Entity is null"));
     }
 
