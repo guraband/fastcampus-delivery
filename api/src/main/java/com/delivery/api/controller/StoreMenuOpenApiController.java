@@ -1,9 +1,8 @@
 package com.delivery.api.controller;
 
-import com.delivery.api.business.StoreBusiness;
-import com.delivery.api.model.StoreResponse;
+import com.delivery.api.business.StoreMenuBusiness;
+import com.delivery.api.model.StoreMenuResponse;
 import com.delivery.common.dto.CommonResponse;
-import com.delivery.db.enums.StoreCategory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +13,14 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/open-api/store")
-public class StoreOpenApiController {
-    private final StoreBusiness storeBusiness;
-
+@RequestMapping("/open-api/store-menu")
+public class StoreMenuOpenApiController {
+    private final StoreMenuBusiness storeMenuBusiness;
+    
     @GetMapping("/search")
-    public CommonResponse<List<StoreResponse>> search(
-            @RequestParam StoreCategory category
+    public CommonResponse<List<StoreMenuResponse>> search(
+            @RequestParam Long storeId
     ) {
-        return CommonResponse.ok(storeBusiness.searchByCategory(category));
+        return CommonResponse.ok(storeMenuBusiness.searchByStoreId(storeId));
     }
 }

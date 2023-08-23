@@ -4,10 +4,11 @@ import com.delivery.api.model.StoreRequest;
 import com.delivery.api.model.StoreResponse;
 import com.delivery.common.annotation.Converter;
 import com.delivery.db.entity.Store;
+import com.delivery.db.enums.StoreStatus;
 
 @Converter
 public class StoreConverter {
-    public Store toEntity(StoreRequest request) {
+    public Store toEntity(StoreRequest request, long userId) {
         return Store.builder()
                 .name(request.getName())
                 .address(request.getAddress())
@@ -16,6 +17,9 @@ public class StoreConverter {
                 .minimumDeliveryAmount(request.getMinimumDeliveryAmount())
                 .thumbnailUrl(request.getThumbnailUrl())
                 .phoneNumber(request.getPhoneNumber())
+                .star(0)
+                .status(StoreStatus.REGISTERED)
+                .createdBy(userId)
                 .build();
     }
 

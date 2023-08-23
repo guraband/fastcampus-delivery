@@ -17,7 +17,7 @@ public class UserController {
     private final UserBusiness userBusiness;
 
     @GetMapping("/me")
-    public CommonResponse<UserResponse> getMe(@Parameter(hidden = true) @UserSession Long id) {
-        return CommonResponse.ok(userBusiness.getMe(id));
+    public CommonResponse<UserResponse> getMe(@Parameter(hidden = true) @UserSession Long userId) {
+        return CommonResponse.ok(userBusiness.getMe(userId));
     }
 }

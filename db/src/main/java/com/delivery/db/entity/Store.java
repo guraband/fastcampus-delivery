@@ -6,7 +6,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 
@@ -14,7 +18,7 @@ import java.math.BigDecimal;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 public class Store extends BaseEntity {
     @Column(length = 100, nullable = false)
@@ -44,9 +48,4 @@ public class Store extends BaseEntity {
 
     @Column(length = 20, nullable = false)
     private String phoneNumber;
-
-    public void init() {
-        this.star = 0;
-        this.status = StoreStatus.REGISTERED;
-    }
 }

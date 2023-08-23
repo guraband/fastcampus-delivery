@@ -17,8 +17,8 @@ public class StoreBusiness {
     private final StoreService storeService;
     private final StoreConverter storeConverter;
 
-    public StoreResponse register(StoreRequest request) {
-        var entity = storeConverter.toEntity(request);
+    public StoreResponse register(StoreRequest request, Long userId) {
+        var entity = storeConverter.toEntity(request, userId);
         var newEntity = storeService.register(entity);
         return storeConverter.toResponse(newEntity);
     }

@@ -28,10 +28,7 @@ public class StoreService {
     @Transactional
     public Store register(Store store) {
         return Optional.ofNullable(store)
-                .map(item -> {
-                    item.init();
-                    return storeRepository.save(item);
-                })
+                .map(storeRepository::save)
                 .orElseThrow(() -> new ApiException(ErrorStatusCode.NULL_POINT, "Store Entity is null"));
     }
 
