@@ -1,5 +1,6 @@
 package com.delivery.common.exception;
 
+import com.delivery.common.status.ErrorStatusCode;
 import com.delivery.common.status.StatusCode;
 import lombok.Getter;
 
@@ -8,6 +9,10 @@ public class ApiException extends RuntimeException {
     private final StatusCode errorStatusCode;
 
     private final String message;
+
+    public static ApiException nullError() {
+        return new ApiException(ErrorStatusCode.NULL_POINT);
+    }
 
     public ApiException(StatusCode errorStatusCode) {
         super(errorStatusCode.getMessage());

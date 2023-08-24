@@ -23,6 +23,10 @@ public class StoreMenuService {
                 .orElseThrow(() -> new ApiException(ErrorStatusCode.SERVER_ERROR));
     }
 
+    public List<StoreMenu> getAllByIds(List<Long> storeMenuIds) {
+        return storeMenuRepository.findAllByIdInAndStatus(storeMenuIds, StoreMenuStatus.REGISTERED);
+    }
+
     // 특정 스토어의 메뉴 목록 조회
     public List<StoreMenu> getStoreMenus(Long storeId) {
         return storeMenuRepository.findAllByStoreIdAndStatusOrderBySortOrder(storeId, StoreMenuStatus.REGISTERED);

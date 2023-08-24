@@ -50,7 +50,7 @@ public class UserOrderService {
     private UserOrder changeStatus(UserOrder userOrder, UserOrderStatus status) {
         return Optional.ofNullable(userOrder)
                 .map(item -> {
-                    changeStatus(userOrder, status);
+                    userOrder.changeStatus(status);
                     return userOrderRepository.save(userOrder);
                 })
                 .orElseThrow(() -> new ApiException(ErrorStatusCode.NULL_POINT));

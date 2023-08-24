@@ -18,4 +18,8 @@ public class UserOrderMenuService {
     public List<UserOrderMenu> getUserOrderMenus(Long userOrderId) {
         return userOrderMenuRepository.findAllByUserOrderIdAndStatusOrderById(userOrderId, UserOrderMenuStatus.REGISTERED);
     }
+
+    public List<UserOrderMenu> order(List<UserOrderMenu> userOrderMenus) {
+        return userOrderMenuRepository.saveAll(userOrderMenus);
+    }
 }
