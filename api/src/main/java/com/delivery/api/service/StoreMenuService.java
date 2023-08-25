@@ -32,7 +32,7 @@ public class StoreMenuService {
         return storeMenuRepository.findAllByStoreIdAndStatusOrderBySortOrder(storeId, StoreMenuStatus.REGISTERED);
     }
 
-    // 스토어 등록
+    // 스토어 메뉴 등록
     @Transactional
     public StoreMenu register(StoreMenu storeMenu) {
         return Optional.ofNullable(storeMenu)
