@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,5 +16,5 @@ public class UserOrderDetailResponse {
 
     private StoreResponse storeResponse;
 
-    private StoreMenuResponse storeMenuResponse;
+    private List<StoreMenuResponse> storeMenuResponses;
 }

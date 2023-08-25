@@ -6,6 +6,8 @@ import com.delivery.common.annotation.Converter;
 import com.delivery.db.entity.StoreMenu;
 import com.delivery.db.enums.StoreMenuStatus;
 
+import java.util.List;
+
 @Converter
 public class StoreMenuConverter {
     public StoreMenu toEntity(StoreMenuRequest request, Long userId) {
@@ -31,5 +33,9 @@ public class StoreMenuConverter {
                 .likeCount(storeMenu.getLikeCount())
                 .sortOrder(storeMenu.getSortOrder())
                 .build();
+    }
+
+    public List<StoreMenuResponse> toResponse(List<StoreMenu> storeMenus) {
+        return storeMenus.stream().map(this::toResponse).toList();
     }
 }
