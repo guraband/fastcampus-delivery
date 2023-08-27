@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StoreUserRequest {
     @NotBlank
-    private String name;
+    private Long storeId;
 
     @NotBlank
     @Email

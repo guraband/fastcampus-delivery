@@ -36,3 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 /api/src/main/resources/env.yml
+/common/src/main/resources/env.yml
+/store-admin/src/main/resources/env.yml

@@ -1,8 +1,7 @@
 package com.delivery.storeadmin.controller;
 
-import com.delivery.api.model.UserLoginRequest;
 import com.delivery.common.dto.CommonResponse;
-import com.delivery.common.dto.TokenResponse;
+import com.delivery.storeadmin.business.StoreUserBusiness;
 import com.delivery.storeadmin.model.StoreUserRequest;
 import com.delivery.storeadmin.model.StoreUserResponse;
 import jakarta.validation.Valid;
@@ -19,14 +18,15 @@ public class StoreUserOpenApiController {
     private final StoreUserBusiness storeUserBusiness;
 
     @PostMapping("/register")
-    public StoreUserResponse register(@Valid @RequestBody StoreUserRequest request) {
-        var response = userBusiness.register(request);
+    public CommonResponse<StoreUserResponse> register(@Valid @RequestBody StoreUserRequest request) {
+        var response = storeUserBusiness.register(request);
         return CommonResponse.ok(response);
     }
-
+/*
     @PostMapping("/login")
     public CommonResponse<TokenResponse> login(@Valid @RequestBody UserLoginRequest request) {
         var response = userBusiness.login(request);
         return CommonResponse.ok(response);
     }
+    */
 }

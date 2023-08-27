@@ -1,4 +1,4 @@
-package com.delivery.common.interceptor;
+package com.delivery.api.interceptor;
 
 import com.delivery.api.business.TokenBusiness;
 import com.delivery.common.exception.ApiException;

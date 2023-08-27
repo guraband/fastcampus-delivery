@@ -21,21 +21,22 @@ public class StoreUserResponse {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    static class UserResponse {
-        private String id;
+    public static class UserResponse {
+        private Long id;
 
         private String email;
 
         private StoreUserStatus status;
 
         private StoreUserRole role;
+
     }
 
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    static class StoreResponse {
+    public static class StoreResponse {
         private Long id;
 
         private String name;

@@ -1,6 +1,6 @@
 package com.delivery.api.config;
 
-import com.delivery.common.interceptor.AuthorizationInterceptor;
+import com.delivery.api.interceptor.AuthorizationInterceptor;
 import com.delivery.common.resolver.UserSessionResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

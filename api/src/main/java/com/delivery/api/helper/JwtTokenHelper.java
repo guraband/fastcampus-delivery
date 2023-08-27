@@ -1,4 +1,4 @@
-package com.delivery.common.helper;
+package com.delivery.api.helper;
 
 import com.delivery.common.dto.Token;
 import com.delivery.common.exception.ApiException;
