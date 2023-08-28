@@ -6,6 +6,7 @@ import com.delivery.db.entity.StoreUser;
 import com.delivery.db.enums.StoreUserStatus;
 import com.delivery.storeadmin.model.StoreUserRequest;
 import com.delivery.storeadmin.model.StoreUserResponse;
+import com.delivery.storeadmin.model.StoreUserSession;
 import com.delivery.storeadmin.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,6 +43,25 @@ public class StoreUserConverter {
                         StoreUserResponse.StoreResponse.builder()
                                 .id(store.getId())
                                 .name(store.getName())
+                                .build()
+                )
+                .build();
+    }
+
+    public StoreUserResponse toResponse(StoreUserSession storeUserSession) {
+        return StoreUserResponse.builder()
+                .user(
+                        StoreUserResponse.UserResponse.builder()
+                                .id(storeUserSession.getId())
+                                .email(storeUserSession.getEmail())
+                                .status(storeUserSession.getStatus())
+                                .role(storeUserSession.getRole())
+                                .build()
+                )
+                .store(
+                        StoreUserResponse.StoreResponse.builder()
+                                .id(storeUserSession.getStoreId())
+                                .name(storeUserSession.getStoreName())
                                 .build()
                 )
                 .build();
