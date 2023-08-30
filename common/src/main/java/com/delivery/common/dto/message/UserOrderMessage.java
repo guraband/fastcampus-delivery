@@ -11,4 +11,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserOrderMessage {
     private Long userOrderId;
+
+    @Override
+    public String toString() {
+        return "UserOrderMessage{" +
+                "userOrderId=" + userOrderId +
+                '}';
+    }
 }

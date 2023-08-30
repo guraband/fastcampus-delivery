@@ -7,7 +7,7 @@ import com.delivery.api.converter.UserOrderMenuConverter;
 import com.delivery.api.model.UserOrderDetailResponse;
 import com.delivery.api.model.UserOrderRequest;
 import com.delivery.api.model.UserOrderResponse;
-import com.delivery.api.rabbitmq.UserOrderProducer;
+import com.delivery.api.producer.UserOrderProducer;
 import com.delivery.api.service.StoreMenuService;
 import com.delivery.api.service.StoreService;
 import com.delivery.api.service.UserOrderMenuService;

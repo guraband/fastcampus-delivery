@@ -1,0 +1,6 @@
+spring:
+  config:
+    import: classpath:env.yml
+  rabbitmq:
+    host: localhost
+    port: 5672

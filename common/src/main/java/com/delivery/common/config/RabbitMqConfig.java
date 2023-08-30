@@ -1,4 +1,4 @@
-package com.delivery.api.config;
+package com.delivery.common.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.Binding;

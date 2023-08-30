@@ -1,6 +1,6 @@
-package com.delivery.api.rabbitmq;
+package com.delivery.common.rabbitmq;
 
-import com.delivery.api.config.RabbitMqConfig;
+import com.delivery.common.config.RabbitMqConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;

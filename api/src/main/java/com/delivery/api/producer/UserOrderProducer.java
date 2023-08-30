@@ -1,11 +1,12 @@
-package com.delivery.api.rabbitmq;
+package com.delivery.api.producer;
 
 import com.delivery.common.dto.message.UserOrderMessage;
+import com.delivery.common.rabbitmq.Producer;
 import com.delivery.db.entity.UserOrder;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class UserOrderProducer {
     private final Producer producer;
