@@ -7,6 +7,7 @@ import com.delivery.api.converter.UserOrderMenuConverter;
 import com.delivery.api.model.UserOrderDetailResponse;
 import com.delivery.api.model.UserOrderRequest;
 import com.delivery.api.model.UserOrderResponse;
+import com.delivery.api.rabbitmq.UserOrderProducer;
 import com.delivery.api.service.StoreMenuService;
 import com.delivery.api.service.StoreService;
 import com.delivery.api.service.UserOrderMenuService;
@@ -32,6 +33,8 @@ public class UserOrderBusiness {
     private final StoreMenuService storeMenuService;
     private final StoreService storeService;
 
+    private final UserOrderProducer userOrderProducer;
+
     public UserOrderResponse order(UserOrderRequest request, Long userId) {
         var storeMenus = storeMenuService.getAllByIds(request.getStoreMenuIds());
         if (storeMenus.isEmpty() || storeMenus.size() != request.getStoreMenuIds().size()) {
@@ -45,6 +48,8 @@ public class UserOrderBusiness {
                 .map(storeMenu -> userOrderMenuConverter.toEntity(userOrder, storeMenu))
                 .toList();
         userOrderMenuService.order(userOrderMenus);
+
+        userOrderProducer.sendOrder(userOrder);
 
         return userOrderConverter.toResponse(userOrder);
     }

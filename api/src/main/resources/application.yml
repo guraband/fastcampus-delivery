@@ -12,8 +12,9 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/delivery?useUnicode=true&allowPublicKeyRetrieval=true&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: root1234!!
+  rabbitmq:
+    host: localhost
+    port: 5672
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
