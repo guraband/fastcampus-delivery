@@ -1,13 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html
+>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<h1>Main Page</h1>
-<h1 th:text="${#authentication}"></h1>
-<span sec:authentication="name"></span>
+<h1>Main Page?</h1>
+
 </body>
+<script>
+    const url = "http://localhost:8081/api/sse/connect"
+    const eventSource = new EventSource(url);
+
+    eventSource.onopen = event => {
+        console.log("sse connection : ", event);
+    }
+
+    eventSource.onmessage = event => {
+        console.log("received data : ", event.data);
+    }
+    eventSource.onerror = event => {
+        console.log("onerror : ", event);
+    }
+</script>
 </html>

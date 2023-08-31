@@ -2,6 +2,8 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: store-admin
   config:
     import: classpath:env.yml
   rabbitmq:
@@ -20,8 +22,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root1234!!
-  application:
-    name: store-admin
+  thymeleaf:
+    cache: false
+  devtools:
+    livereload:
+      enabled: true
+#    restart:
+#      enabled: true
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
