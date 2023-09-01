@@ -31,7 +31,8 @@ public class SseController {
     ) {
         log.info("login user {}", storeUserSession.getEmail());
 
-        var emitter = new SseEmitter();
+        var emitter = new SseEmitter(60 * 1000L);
+
         emitterMap.put(storeUserSession.getId().toString(), emitter);
         System.out.println(storeUserSession.getId().toString() + " : " + emitterMap);
 
@@ -73,7 +74,7 @@ public class SseController {
 
         System.out.println("# pushEvent");
         System.out.println(emitterMap);
-        System.out.println(storeUserSession.getId().toString() + " : " + emitter);
+        System.out.println(storeUserSession.getId().toString() + " : " + emitterMap);
 
         try {
             emitter.send(event);

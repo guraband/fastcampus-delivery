@@ -20,6 +20,7 @@
     eventSource.onmessage = event => {
         console.log("received data : ", event.data);
     }
+
     eventSource.onerror = event => {
         console.log("onerror : ", event);
     }
