@@ -1,6 +1,9 @@
 package com.delivery.storeadmin.controller;
 
+import com.delivery.storeadmin.component.SseConnectionPoolImpl;
 import com.delivery.storeadmin.model.StoreUserSession;
+import com.delivery.storeadmin.model.StoreUserSseConnection;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,11 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-import java.io.IOException;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -22,7 +22,8 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequestMapping("/api/sse")
 public class SseController {
 
-    private static final Map<String, SseEmitter> emitterMap = new ConcurrentHashMap<>();
+    private final SseConnectionPoolImpl sseConnectionPool;
+    private final ObjectMapper objectMapper;
 
     @GetMapping(value = "/connect", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseBodyEmitter connect(
@@ -31,33 +32,11 @@ public class SseController {
     ) {
         log.info("login user {}", storeUserSession.getEmail());
 
-        var emitter = new SseEmitter(60 * 1000L);
-
-        emitterMap.put(storeUserSession.getId().toString(), emitter);
-        System.out.println(storeUserSession.getId().toString() + " : " + emitterMap);
-
-        emitter.onTimeout(() -> {
-            log.info("emitter.onTimeout");
-            emitter.complete();
-        });
-
-        // 클라이언트와 연결이 종료되었을 때
-        emitter.onCompletion(() -> {
-            log.info("emitter.onCompletion");
-            emitterMap.remove(storeUserSession.getId().toString());
-        });
-
-        var event = SseEmitter.event()
-                .name("onopen")
-                .data("connect");
-
-        try {
-            emitter.send(event);
-        } catch (IOException e) {
-            emitter.completeWithError(e);
-        }
-
-        return emitter;
+        var connection = StoreUserSseConnection.connect(
+                storeUserSession.getId().toString(),
+                sseConnectionPool,
+                objectMapper);
+        return connection.getSseEmitter();
     }
 
     @GetMapping("/push-event")
@@ -65,21 +44,9 @@ public class SseController {
             @Parameter(hidden = true)
             @AuthenticationPrincipal StoreUserSession storeUserSession
     ) {
-
-        var event = SseEmitter.event()
-                .data("hi!!!");
-
-        // 기존 유저 emitter 조회
-        var emitter = emitterMap.get(storeUserSession.getId().toString());
-
-        System.out.println("# pushEvent");
-        System.out.println(emitterMap);
-        System.out.println(storeUserSession.getId().toString() + " : " + emitterMap);
-
-        try {
-            emitter.send(event);
-        } catch (IOException e) {
-            emitter.completeWithError(e);
-        }
+        Optional.ofNullable(sseConnectionPool.getSession(storeUserSession.getId().toString()))
+                .ifPresent(it -> {
+                    it.sendMessage("Hello~");
+                });
     }
 }
