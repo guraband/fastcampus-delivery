@@ -19,6 +19,7 @@ public class UserOrderConverter {
 
         return UserOrder.builder()
                 .userId(userId)
+                .storeId(storeMenus.get(0).getStoreId())
                 .amount(totalAmount)
                 .createdBy(userId)
                 .build();
@@ -27,6 +28,8 @@ public class UserOrderConverter {
     public UserOrderResponse toResponse(UserOrder entity) {
         return UserOrderResponse.builder()
                 .id(entity.getId())
+                .userId(entity.getUserId())
+                .storeId(entity.getStoreId())
                 .amount(entity.getAmount())
                 .status(entity.getStatus())
                 .orderedAt(entity.getOrderedAt())

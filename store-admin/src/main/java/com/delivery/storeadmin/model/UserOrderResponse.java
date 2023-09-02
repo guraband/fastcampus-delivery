@@ -1,4 +1,4 @@
-package com.delivery.api.model;
+package com.delivery.storeadmin.model;
 
 import com.delivery.db.enums.UserOrderStatus;
 import lombok.AllArgsConstructor;
