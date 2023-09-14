@@ -38,3 +38,5 @@ out/
 /api/src/main/resources/env.yml
 /common/src/main/resources/env.yml
 /store-admin/src/main/resources/env.yml
+/diff1.txt
+/diff2.txt
