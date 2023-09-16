@@ -21,7 +21,7 @@ public class ApiExceptionHandler {
 
         return ResponseEntity.status(e.getErrorStatusCode().getHttpStatusCode())
                 .body(
-                        CommonResponse.error(e.getErrorStatusCode(), e.getMessage())
+                        CommonResponse.error(e.getErrorStatusCode(), e.getErrorMessage())
                 );
     }
 
