@@ -19,8 +19,8 @@ public class UserOrderService {
     private final UserOrderRepository userOrderRepository;
 
     public UserOrder getOrThrow(Long id, Long userId) {
-        return userOrderRepository.findByIdAndStatusAndUserId(id, UserOrderStatus.ORDER, userId)
-                .orElseThrow(() -> new ApiException(ErrorStatusCode.SERVER_ERROR));
+        return Optional.ofNullable(userOrderRepository.findByIdAndStatusAndUserId(id, UserOrderStatus.ORDER, userId)
+        ).orElseThrow(() -> new ApiException(ErrorStatusCode.SERVER_ERROR));
     }
 
     public List<UserOrder> getUserOrders(Long userId) {

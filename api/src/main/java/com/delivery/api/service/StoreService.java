@@ -20,8 +20,9 @@ public class StoreService {
 
     // 스토어 조회
     public Store getOrThrow(Long id) {
-        return storeRepository.findFirstByIdAndStatusOrderByIdDesc(id, StoreStatus.REGISTERED)
-                .orElseThrow(() -> new ApiException(ErrorStatusCode.SERVER_ERROR));
+        return Optional.ofNullable(
+                storeRepository.findFirstByIdAndStatusOrderByIdDesc(id, StoreStatus.REGISTERED)
+        ).orElseThrow(() -> new ApiException(ErrorStatusCode.SERVER_ERROR));
     }
 
     // 스토어 등록

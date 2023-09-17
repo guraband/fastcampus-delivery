@@ -19,8 +19,8 @@ public class StoreMenuService {
 
     // 스토어 조회
     public StoreMenu getOrThrow(Long id) {
-        return storeMenuRepository.findFirstByIdAndStatusOrderByIdDesc(id, StoreMenuStatus.REGISTERED)
-                .orElseThrow(() -> new ApiException(ErrorStatusCode.SERVER_ERROR));
+        return Optional.ofNullable(storeMenuRepository.findFirstByIdAndStatusOrderByIdDesc(id, StoreMenuStatus.REGISTERED)
+        ).orElseThrow(() -> new ApiException(ErrorStatusCode.SERVER_ERROR));
     }
 
     public List<StoreMenu> getAllByIds(List<Long> storeMenuIds) {

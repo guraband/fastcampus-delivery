@@ -8,6 +8,8 @@ import com.delivery.db.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class StoreService {
@@ -15,7 +17,7 @@ public class StoreService {
 
     // 스토어 조회
     public Store getOrThrow(Long id) {
-        return storeRepository.findFirstByIdAndStatusOrderByIdDesc(id, StoreStatus.REGISTERED)
-                .orElseThrow(() -> new ApiException(ErrorStatusCode.SERVER_ERROR));
+        return Optional.ofNullable(storeRepository.findFirstByIdAndStatusOrderByIdDesc(id, StoreStatus.REGISTERED)
+        ).orElseThrow(() -> new ApiException(ErrorStatusCode.SERVER_ERROR));
     }
 }

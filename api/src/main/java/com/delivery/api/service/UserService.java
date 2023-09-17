@@ -24,13 +24,13 @@ public class UserService {
     }
 
     private User getUserOrThrow(String email, String password) {
-        return userRepository.findFirstByEmailAndPasswordAndStatusOrderByIdDesc(email, password, UserStatus.REGISTERED)
-                .orElseThrow(() -> new ApiException(ErrorStatusCode.USER_NOT_FOUND));
+        return Optional.ofNullable(userRepository.findFirstByEmailAndPasswordAndStatusOrderByIdDesc(email, password, UserStatus.REGISTERED)
+        ).orElseThrow(() -> new ApiException(ErrorStatusCode.USER_NOT_FOUND));
     }
 
     public User getUserOrThrow(Long id) {
-        return userRepository.findFirstByIdAndStatusOrderByIdDesc(id, UserStatus.REGISTERED)
-                .orElseThrow(() -> new ApiException(ErrorStatusCode.USER_NOT_FOUND));
+        return Optional.ofNullable(userRepository.findFirstByIdAndStatusOrderByIdDesc(id, UserStatus.REGISTERED)
+        ).orElseThrow(() -> new ApiException(ErrorStatusCode.USER_NOT_FOUND));
     }
 
     public User login(String email, String password) {
