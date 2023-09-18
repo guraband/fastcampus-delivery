@@ -3,6 +3,7 @@ package com.delivery.api.converter;
 import com.delivery.api.model.StoreMenuRequest;
 import com.delivery.api.model.StoreMenuResponse;
 import com.delivery.common.annotation.Converter;
+import com.delivery.db.entity.Store;
 import com.delivery.db.entity.StoreMenu;
 import com.delivery.db.enums.StoreMenuStatus;
 
@@ -10,9 +11,9 @@ import java.util.List;
 
 @Converter
 public class StoreMenuConverter {
-    public StoreMenu toEntity(StoreMenuRequest request, Long userId) {
+    public StoreMenu toEntity(StoreMenuRequest request, Store store, Long userId) {
         return StoreMenu.builder()
-                .storeId(request.getStoreId())
+                .store(store)
                 .name(request.getName())
                 .amount(request.getAmount())
                 .thumbnailUrl(request.getThumbnailUrl())
@@ -25,7 +26,7 @@ public class StoreMenuConverter {
     public StoreMenuResponse toResponse(StoreMenu storeMenu) {
         return StoreMenuResponse.builder()
                 .id(storeMenu.getId())
-                .storeId(storeMenu.getStoreId())
+                .storeId(storeMenu.getStore().getId())
                 .name(storeMenu.getName())
                 .status(storeMenu.getStatus())
                 .amount(storeMenu.getAmount())

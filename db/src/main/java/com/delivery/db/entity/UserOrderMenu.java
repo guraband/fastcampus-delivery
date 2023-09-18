@@ -1,10 +1,7 @@
 package com.delivery.db.entity;
 
 import com.delivery.db.enums.UserOrderMenuStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,11 +15,13 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 public class UserOrderMenu extends BaseEntity {
-    @Column(nullable = false)
-    private Long userOrderId;
+    @JoinColumn(nullable = false)
+    @ManyToOne
+    private UserOrder userOrder;
 
-    @Column(nullable = false)
-    private Long storeMenuId;
+    @JoinColumn(nullable = false)
+    @ManyToOne
+    private StoreMenu storeMenu;
 
     @Column(length = 50, nullable = false)
     @Enumerated(EnumType.STRING)

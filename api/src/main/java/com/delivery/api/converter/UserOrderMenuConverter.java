@@ -12,8 +12,8 @@ import lombok.RequiredArgsConstructor;
 public class UserOrderMenuConverter {
     public UserOrderMenu toEntity(UserOrder userOrder, StoreMenu storeMenu) {
         return UserOrderMenu.builder()
-                .userOrderId(userOrder.getId())
-                .storeMenuId(storeMenu.getId())
+                .userOrder(userOrder)
+                .storeMenu(storeMenu)
                 .status(UserOrderMenuStatus.REGISTERED)
                 .createdBy(userOrder.getCreatedBy())
                 .build();

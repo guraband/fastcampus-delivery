@@ -34,11 +34,9 @@ public class UserOrderBusiness {
         // 주문 정보 조회
         var userOrderMenus = userOrderMenuService.getUserOrderMenus(userOrder.getId());
 
-        var storeMenus = storeMenuService.getAllByIds(
-                userOrderMenus.stream()
-                        .map(UserOrderMenu::getStoreMenuId)
-                        .toList()
-        );
+        var storeMenus = userOrderMenus.stream()
+                .map(UserOrderMenu::getStoreMenu)
+                .toList();
         var storeMenuResponses = storeMenus.stream()
                 .map(storeMenuConverter::toResponse)
                 .toList();
@@ -48,7 +46,9 @@ public class UserOrderBusiness {
                 .storeMenuResponses(storeMenuResponses)
                 .build();
 
-        var storeUserSession = sseConnectionPool.getSession(userOrder.getStoreId().toString());
-        storeUserSession.sendMessage(userOrderDetailResponse);
+        var storeUserSession = sseConnectionPool.getSession(String.valueOf(userOrder.getStore().getId()));
+        if (storeUserSession != null) {
+            storeUserSession.sendMessage(userOrderDetailResponse);
+        }
     }
 }

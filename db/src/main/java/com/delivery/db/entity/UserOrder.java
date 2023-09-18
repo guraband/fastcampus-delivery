@@ -1,10 +1,7 @@
 package com.delivery.db.entity;
 
 import com.delivery.db.enums.UserOrderStatus;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -13,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,8 +22,9 @@ public class UserOrder extends BaseEntity {
     @Column(nullable = false)
     private Long userId;
 
-    @Column(nullable = false)
-    private Long storeId;
+    @JoinColumn(nullable = false)
+    @ManyToOne
+    private Store store;
 
     @Column(length = 50, nullable = false)
     @Enumerated(EnumType.STRING)
@@ -48,6 +47,9 @@ public class UserOrder extends BaseEntity {
 
     @Column
     private LocalDateTime receivedAt;
+
+    @OneToMany(mappedBy = "userOrder")
+    private List<UserOrderMenu> userOrderMenus;
 
     public void changeStatus(UserOrderStatus status) {
         this.status = status;

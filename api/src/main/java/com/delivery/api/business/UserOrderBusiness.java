@@ -15,7 +15,6 @@ import com.delivery.api.service.UserOrderService;
 import com.delivery.common.annotation.Business;
 import com.delivery.common.exception.ApiException;
 import com.delivery.db.entity.UserOrder;
-import com.delivery.db.entity.UserOrderMenu;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -42,7 +41,7 @@ public class UserOrderBusiness {
         }
 
         var userOrder = userOrderService.order(
-                userOrderConverter.toEntity(userId, storeMenus)
+                userOrderConverter.toEntity(userId, storeMenus.get(0).getStore(), storeMenus)
         );
         var userOrderMenus = storeMenus.stream()
                 .map(storeMenu -> userOrderMenuConverter.toEntity(userOrder, storeMenu))
@@ -74,14 +73,13 @@ public class UserOrderBusiness {
     private UserOrderDetailResponse toUserOrderDetailResponse(UserOrder userOrder) {
         var userOderMenus = userOrderMenuService.getUserOrderMenus(userOrder.getId());
         var storeMenuIds = userOderMenus.stream()
-                .map(UserOrderMenu::getStoreMenuId)
+                .map(userOrderMenu -> userOrderMenu.getStoreMenu().getId())
                 .toList();
         var storeMenus = storeMenuService.getAllByIds(storeMenuIds);
-        var store = storeService.getOrThrow(storeMenus.get(0).getStoreId());
 
         return UserOrderDetailResponse.builder()
                 .userOrderResponse(userOrderConverter.toResponse(userOrder))
-                .storeResponse(storeConverter.toResponse(store))
+                .storeResponse(storeConverter.toResponse(storeMenus.get(0).getStore()))
                 .storeMenuResponses(storeMenuConverter.toResponse(storeMenus))
                 .build();
     }
