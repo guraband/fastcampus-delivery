@@ -8,7 +8,7 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 
 @Entity
-data class UserOrder(
+class UserOrder(
     @field:Id
     @field:GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
@@ -44,7 +44,7 @@ data class UserOrder(
 
     @field:OneToMany(mappedBy = "userOrder")
     @field:JsonIgnore
-    var userOrderMenus: List<UserOrderMenu>? = null,
+    var userOrderMenus: MutableList<UserOrderMenu>? = null,
 
     @field:Column
     var createdBy: Long? = null,
