@@ -1,0 +1,12 @@
+spring:
+  config:
+    import: classpath:env.yml
+
+server:
+  port: 8082
+
+token:
+  access-token:
+    ttl-hour: 1
+  refresh-token:
+    ttl-hour: 12
