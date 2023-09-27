@@ -1,9 +1,9 @@
 package com.delivery.account.controller
 
 import com.delivery.account.business.TokenBusiness
-import com.delivery.account.model.TokenValidationRequest
-import com.delivery.account.model.TokenValidationResponse
 import com.delivery.common.Log
+import com.delivery.common.dto.TokenValidationRequest
+import com.delivery.common.dto.TokenValidationResponse
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping

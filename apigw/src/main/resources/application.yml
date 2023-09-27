@@ -1,6 +1,10 @@
 server:
   port: 9090
+
+
 spring:
+  main:
+    web-application-type: reactive
   cloud:
     gateway:
       routes:
@@ -11,3 +15,7 @@ spring:
           filters:
             - RewritePath=/service-api(?<segment>/?.*), $\{segment}
             - ServiceApiPublicFilter
+
+internal-api:
+  account:
+    url: http://localhost:8082
