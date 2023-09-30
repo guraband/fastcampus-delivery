@@ -40,7 +40,7 @@ class ServiceApiPrivateFilter(
             val token = if (headers.isEmpty()) {
                 throw ApiException(TokenErrorStatusCode.TOKEN_NOT_FOUND)
             } else {
-                headers.get(0)
+                headers[0]
             }
 
             log.info("authorization token : {}", token)
@@ -77,9 +77,23 @@ class ServiceApiPrivateFilter(
                 .flatMap { response ->
                     log.info("account api response : {}", response)
 
+                    // 사용자 정보 추가
+                    val id = response.id?.toString()
 
-                    val mono = chain.filter(exchange)
+                    val proxyRequest = exchange.request.mutate()
+                        .header("x-user-id", id)
+                        .build()
+
+                    val requestBuilder = exchange.mutate()
+                        .request(proxyRequest)
+                        .build()
+
+                    val mono = chain.filter(requestBuilder)
                     mono
+                }
+                .onErrorMap { e ->
+                    log.error("", e)
+                    e
                 }
         }
     }

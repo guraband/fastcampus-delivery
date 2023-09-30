@@ -3,12 +3,10 @@ package com.delivery.api.interceptor;
 import com.delivery.api.business.TokenBusiness;
 import com.delivery.common.exception.ApiException;
 import com.delivery.common.status.ErrorStatusCode;
-import com.delivery.common.status.TokenErrorStatusCode;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
@@ -36,13 +34,7 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        var authorizationHeader = StringUtils.defaultString(request.getHeader("Authorization")).split(" ");
-        if (authorizationHeader.length != 2 || !authorizationHeader[0].equals("Bearer") || StringUtils.isEmpty(authorizationHeader[1])) {
-            throw new ApiException(TokenErrorStatusCode.TOKEN_NOT_FOUND);
-        }
-        var accessToken = authorizationHeader[1];
-
-        Long id = tokenBusiness.getIdFromAccessToken(accessToken);
+        var id = request.getHeader("x-user-id");
         if (id == null) {
             throw new ApiException(ErrorStatusCode.BAD_REQUEST, "인증 실패");
         }
